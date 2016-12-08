@@ -16,8 +16,6 @@ public abstract class Utils {
 		int bound = max - min + 1;
 		
 		for(int i=0; i<size; i++){
-			//int num = (int) (Math.random()*(max));
-			//System.out.println("num: " + num);
 			array[i] = random.nextInt(bound) + min;
 		}
 		return array;
@@ -43,6 +41,14 @@ public abstract class Utils {
 		int[] sorted = Arrays.copyOf(array, array.length);
 		Arrays.sort(sorted);
 		return false;
+	}
+	
+	public static int[] reverse(int[] array){
+		int[] result = new int[array.length];
+		for(int i=0, j=array.length-1; i<array.length; i++,j--){
+			result[i] = array[j];
+		}
+		return result;
 	}
 
 	public static int[] partialSortArray(int n) {
