@@ -1,5 +1,8 @@
 package sort;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import util.Utils;
 
 public class QuickSort {
@@ -17,27 +20,35 @@ public class QuickSort {
 	}
 
 	private static void sort(int[] array, int begin, int end) {
-		int pivot = end; //(begin+end)/2;
+		int pivot = end;
 		int i=begin;
 		int j=end-1;
 		
-		System.out.println("begin["+begin+"] end["+end+"] pivot["+pivot+"] Array: " + Utils.getArray(array, begin, end+1));
-		
+		//System.out.println("begin["+begin+"] end["+end+"] pivot["+pivot+"] Array: " + Utils.getArray(array, begin, end+1));
+		//System.out.println("array["+i+"]='"+array[i]+"' array["+j+"]='"+array[j]+"' pivot["+pivot+"]='"+array[pivot]+"' array: " + Utils.getArray(array, begin, end));
 		while(i<j){
 			
-			if(array[i]>array[pivot] && array[i]>=array[j]){
+			if(array[i]>=array[pivot] && array[pivot]>array[j]){
 				Utils.swap(array, i, j);
+				i++;
+				j--;
+			} else if(array[i]<array[pivot]){
+				i++;
+			} else if(array[j]>=array[pivot]){
+				j--;
 			}
-			i++;
-			j--;
-			System.out.println("Though iterations array: " + Utils.getArray(array, begin, end));
+			
+			//System.out.println("array["+i+"]='"+array[i]+"' array["+j+"]='"+array[j]+"' pivot["+pivot+"]='"+array[pivot]+"' array: " + Utils.getArray(array, begin, end));
 		}
 		
-		pivot = (begin+end)/2;
+		//System.out.println("begin["+begin+"] end["+end+"] pivot["+pivot+"] next["+(i)+"] Array: " + Utils.getArray(array, begin, end+1) + "");
+		pivot = i;
+		
 		if(array[pivot]>array[end]){
 			Utils.swap(array, pivot, end);
 		}
-		System.out.println("Before branching array: " + Utils.getArray(array, begin, end+1));
+		
+		//System.out.println("Before branching array: " + Utils.getArray(array, begin, end+1));
 		
 		if(begin<pivot){
 			sort(array, begin, pivot);
