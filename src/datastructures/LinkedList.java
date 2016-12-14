@@ -6,12 +6,25 @@ public class LinkedList {
 	Element initial;
 	Element end;
 	
-	public void add(Element newElement){
-		
+	public LinkedList(){
+		size = 0;
+		initial = null;
+		end = null;
 	}
-}
-
-class Element {
-	int value;
-	Element next;
+	
+	public void add(Element newElement){
+		addLast(newElement);
+	}
+	
+	public void addLast(Element newElement){
+		if(end==null){
+			initial = newElement;
+			end = newElement;
+		} else{
+			end.setNext(newElement);
+			end = newElement;
+		}
+		size++;
+	}
+	
 }
