@@ -31,4 +31,13 @@ public class DeviceInfoTest {
 		Assert.assertEquals("DVW2110", result);
 	}
 
+	@Test
+	public void testGetMAC_MTA() {
+		String strKey="STRING";
+		String string = "IF-MIB::ifPhysAddress.16 = STRING: 80:c6:ab:c9:46:98";
+		DeviceInfo dev = new DeviceInfo(strKey, string);
+		String result = dev.getDeviceInfo();
+		Assert.assertEquals("80:c6:ab:c9:46:98", result);
+	}
+
 }
