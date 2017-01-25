@@ -16,4 +16,12 @@ public class DeviceInfo {
 		result = result.substring(0, finalPos);
 		return result;
 	}
+
+	public String getDeviceInfoCM() {
+		if(strKey.startsWith(".")){
+			strKey = strKey.substring(1, strKey.length());
+		}
+		strKey = strKey.concat(" ");
+		return getDeviceInfo();
+	}
 }
