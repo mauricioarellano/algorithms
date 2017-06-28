@@ -67,5 +67,15 @@ public class DeviceInfoTest {
 		String result = dev.getDeviceInfo();
 		Assert.assertEquals("Arris", result);
 	}
+	
+	@Test
+	public void testCleanBrackets() {
+		String strKey="";
+		String string = "[8]";
+		DeviceInfo dev = new DeviceInfo(strKey, string);
+		dev.setActivation_stdout(string);
+		String result = dev.cleanBrackets();
+		Assert.assertEquals("8", result);
+	}
 
 }

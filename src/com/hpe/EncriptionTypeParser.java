@@ -26,4 +26,22 @@ public class EncriptionTypeParser {
 		}
 		return 0;
 	}
+	
+	public String getPassphrase(){
+		if (activation_stdout.trim().isEmpty()){
+			return "";
+		}
+		
+		String string = activation_stdout.substring(activation_stdout.indexOf("[")+1, activation_stdout.indexOf("]")!=-1?activation_stdout.indexOf("]"):activation_stdout.length());
+		String[] tokens = string.split(",");
+		
+		for (String str : tokens) {
+			str = str.replaceAll("'", "").trim();
+			if( !str.isEmpty()){
+				return str;
+			}
+		}
+		
+		return "";
+	} 
 }
