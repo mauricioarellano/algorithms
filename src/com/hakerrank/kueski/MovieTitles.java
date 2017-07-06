@@ -12,6 +12,8 @@ import org.json.simple.*;
 import org.json.simple.parser.*;
 import org.json.simple.parser.ParseException;
 
+//https://www.mkyong.com/java/json-simple-example-read-and-write-json/
+//
 public class MovieTitles {
 	static String[] getMovieTitles(String substr) {
 		String service = "https://jsonmock.hackerrank.com/api/movies/search/?Title=";
