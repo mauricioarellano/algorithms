@@ -1,4 +1,4 @@
-package com.hakerrank.kueski;
+package com.hackerrank.kueski;
 
 import static org.junit.Assert.*;
 
