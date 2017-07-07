@@ -1,4 +1,4 @@
-package com.hakerrank.kueski;
+package com.hackerrank.kueski;
 
 import java.util.ArrayList;
 import java.util.List;
