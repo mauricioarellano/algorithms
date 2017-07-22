@@ -20,6 +20,7 @@ public class AuctionTest {
 		Bidder winner = auction.executeAuction();
 		System.out.println("== " + auction + " winner is: " + winner.toString() + " ==\n");
 		assertNotNull(winner);
+		assertEquals(linda, winner);
 	}
 
 	@Test
@@ -36,6 +37,7 @@ public class AuctionTest {
 		Bidder winner = auction.executeAuction();
 		System.out.println("== " + auction + " winner is: " + winner.toString() + " ==\n");
 		assertNotNull(winner);
+		assertEquals(eric, winner);
 	}
 
 	@Test
@@ -52,6 +54,7 @@ public class AuctionTest {
 		Bidder winner = auction.executeAuction();
 		System.out.println("== " + auction + " winner is: " + winner.toString() + " ==\n");
 		assertNotNull(winner);
+		assertEquals(dave, winner);
 	}
 
 }
