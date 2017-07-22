@@ -29,17 +29,14 @@ public class Auction  {
 		
 		int currentBid = 0;
 		Bidder currentBidder = null;
-		//System.out.println("currentBid: " + currentBid);
 		
 		while(bidders.size()>1){
 			List<Bidder> biddersAux = new ArrayList<Bidder>(bidders);
 			for (Bidder bidder : bidders) {
 				try {
-					System.out.println("current bid: " + currentBid + "; " + bidder);
 					if(currentBid < bidder.getBid()){
 						currentBid = bidder.getBid();
 						currentBidder = bidder;
-						System.out.println("new bid: " + currentBid + "; " + bidder);
 					} else if(currentBid >= bidder.getBid() && !bidder.equals(currentBidder)){
 						if(currentBid > bidder.getOffer().getMaxBid()){
 							throw new MaxBidReachedException();
@@ -48,14 +45,11 @@ public class Auction  {
 						if(currentBid < bidder.getBid()){
 							currentBid = bidder.getBid();
 							currentBidder = bidder;
-							System.out.println("new bid: " + currentBid + "; " + bidder);
 						}
 					}
 					
-					//System.out.println("bid: " + currentBid + "; " + bidder);
 				} catch (MaxBidReachedException e) {
 					biddersAux.remove(bidder);
-					System.out.println("Deleted: " + bidder);
 				}
 			}
 			bidders = biddersAux;
@@ -68,6 +62,5 @@ public class Auction  {
 	public String toString() {
 		return "Auction [item=" + item + "]";
 	}
-	
 	
 }
