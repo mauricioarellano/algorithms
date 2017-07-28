@@ -11,20 +11,28 @@ public class Auction implements Auctioneer  {
 	public Auction(String item) {
 		this.item = item;
 	}
-	
+
 	@Override
 	public Bidder executeAuction(List<Bidder> biddersList){
+		return executeAuction(biddersList, 0);
+	}
+
+	@Override
+	public Bidder executeAuction(List<Bidder> biddersList, int startingBid) {
 		if(biddersList==null || biddersList.isEmpty()){
 			return null;
 		}
 		
-		Bidder currentBidder = biddersList.get(0);
-		int currentBid = currentBidder.getBid();;
+		Bidder currentBidder = null; 
+		int currentBid = startingBid;
 		
 		while(biddersList.size()>1){
 			List<Bidder> biddersAux = new ArrayList<Bidder>(biddersList);
 			for (Bidder bidder : biddersList) {
-				if(currentBid >= bidder.getBid() && !bidder.equals(currentBidder)){
+				if(bidder.getBid() > currentBid){
+					currentBidder = bidder;
+					currentBid = currentBidder.getBid();
+				} else if(currentBid >= bidder.getBid() && !bidder.equals(currentBidder)){
 					if(currentBid > bidder.getOffer().getMaxBid()){
 						biddersAux.remove(bidder);
 					} else {
@@ -39,6 +47,10 @@ public class Auction implements Auctioneer  {
 				}
 			}
 			biddersList = biddersAux;
+		}
+		
+		if(biddersList.isEmpty()){
+			return null;
 		}
 		
 		return biddersList.get(0);

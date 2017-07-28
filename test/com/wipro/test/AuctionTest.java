@@ -13,6 +13,23 @@ import com.wipro.test.entities.Offer;
 public class AuctionTest {
 
 	@Test
+	public void testNull() {
+		Auctioneer auction = new Auction("Null");
+		Bidder winner = auction.executeAuction(null);
+		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
+		assertNull(winner);
+	}
+
+	@Test
+	public void test0() {
+		Auctioneer auction = new Auction("Zero");
+		List<Bidder> bidders = new ArrayList<Bidder>();
+		Bidder winner = auction.executeAuction(bidders);
+		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
+		assertNull(winner);
+	}
+
+	@Test
 	public void testAuctionOne() {
 		Auctioneer auction = new Auction("Record player");
 		Bidder linda = new Bidder("Linda", new Offer(170, 240, 3));
@@ -25,7 +42,7 @@ public class AuctionTest {
 		bidders.add(eric);
 		
 		Bidder winner = auction.executeAuction(bidders);
-		System.out.println("== " + auction + " winner is: " + winner.toString() + " ==\n");
+		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
 		assertNotNull(winner);
 		assertEquals(linda, winner);
 	}
@@ -43,7 +60,7 @@ public class AuctionTest {
 		bidders.add(eric);
 		
 		Bidder winner = auction.executeAuction(bidders);
-		System.out.println("== " + auction + " winner is: " + winner.toString() + " ==\n");
+		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
 		assertNotNull(winner);
 		assertEquals(eric, winner);
 	}
@@ -62,26 +79,46 @@ public class AuctionTest {
 		bidders.add(eric);
 		
 		Bidder winner = auction.executeAuction(bidders);
-		System.out.println("== " + auction + " winner is: " + winner.toString() + " ==\n");
+		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
 		assertNotNull(winner);
 		assertEquals(dave, winner);
 	}
 	
 	@Test
-	public void test0() {
-		Auctioneer auction = new Auction("Zero");
+	public void testAuctionOneInitialValue() {
+		Auctioneer auction = new Auction("Record player starting with 200");
+		int initialBid = 200;
+		
+		Bidder linda = new Bidder("Linda", new Offer(170, 240, 3));
+		Bidder dave =  new Bidder("Dave",  new Offer(160, 243, 7));
+		Bidder eric =  new Bidder("Eric",  new Offer(190, 240, 4));
 		List<Bidder> bidders = new ArrayList<Bidder>();
-		Bidder winner = auction.executeAuction(bidders);
+		
+		bidders.add(linda);
+		bidders.add(dave);
+		bidders.add(eric);
+		
+		Bidder winner = auction.executeAuction(bidders, initialBid);
 		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
-		assertNull(winner);
+		assertNotNull(winner);
+		assertEquals(linda, winner);
 	}
-
+	
 	@Test
-	public void testNull() {
-		Auctioneer auction = new Auction("Null");
-		Bidder winner = auction.executeAuction(null);
+	public void testAuctionOneNoWinner() {
+		Auctioneer auction = new Auction("Record player starting with 240");
+		Bidder linda = new Bidder("Linda", new Offer(170, 240, 3));
+		Bidder dave =  new Bidder("Dave",  new Offer(160, 243, 7));
+		Bidder eric =  new Bidder("Eric",  new Offer(190, 240, 4));
+		List<Bidder> bidders = new ArrayList<Bidder>();
+		
+		bidders.add(linda);
+		bidders.add(dave);
+		bidders.add(eric);
+		int initialBid = 240;
+		Bidder winner = auction.executeAuction(bidders, initialBid);
 		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
 		assertNull(winner);
 	}
-
+	
 }

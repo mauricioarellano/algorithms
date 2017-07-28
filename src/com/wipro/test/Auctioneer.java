@@ -8,4 +8,6 @@ public interface Auctioneer {
 
 	Bidder executeAuction(List<Bidder> biddersList);
 
+	Bidder executeAuction(List<Bidder> biddersList, int startingBid);
+	
 }
