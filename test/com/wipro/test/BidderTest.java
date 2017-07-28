@@ -1,11 +1,10 @@
 package com.wipro.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.wipro.test.exception.MaxBidReachedException;
+import com.wipro.test.entities.Bidder;
+import com.wipro.test.entities.Offer;
 
 public class BidderTest {
 	
@@ -15,12 +14,7 @@ public class BidderTest {
 		int maxBid = 240;
 		int increment = 4;
 		Bidder bidder = new Bidder("Test", new Offer(initial, maxBid, increment));
-		try {
-			bidder.incrementBid();
-		} catch (MaxBidReachedException e) {
-			// TODO Auto-generated catch block
-			Assert.fail(e.getMessage());
-		}
+		bidder.improveBid(193);
 		System.out.println(bidder);
 		Assert.assertEquals(194, bidder.getBid());
 	}
@@ -31,12 +25,7 @@ public class BidderTest {
 		int maxBid = 200;
 		int increment = 10;
 		Bidder bidder = new Bidder("Test", new Offer(initial, maxBid, increment));
-		try {
-			bidder.incrementBid();
-		} catch (MaxBidReachedException e) {
-			// TODO Auto-generated catch block
-			Assert.fail(e.getMessage());
-		}
+		bidder.improveBid(201);
 		System.out.println(bidder);
 		Assert.assertEquals(maxBid, bidder.getBid());
 	}
@@ -47,13 +36,32 @@ public class BidderTest {
 		int maxBid = 200;
 		int increment = 11;
 		Bidder bidder = new Bidder("Test", new Offer(initial, maxBid, increment));
-		try {
-			bidder.incrementBid();
-		} catch (MaxBidReachedException e) {
-			System.out.println("maxBid reached without increment");
-		}
+		bidder.improveBid(300);
 		System.out.println(bidder);
 		Assert.assertEquals(190, bidder.getBid());
 	}
 
+	
+	@Test
+	public void testImproveBid() {
+		int initial = 234;// 190;
+		int maxBid = 240;
+		int increment = 4;
+		Bidder bidder = new Bidder("Test", new Offer(initial, maxBid, increment));
+		int expected = 238;
+		int actual = bidder.improveBid(237);
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testImproveBidMax() {
+		int initial = 234;// 190;
+		int maxBid = 240;
+		int increment = 4;
+		int currentBid = 300;
+		Bidder bidder = new Bidder("Test", new Offer(initial, maxBid, increment));
+		int expected = 238;
+		int actual = bidder.improveBid(currentBid);
+		Assert.assertEquals(expected, actual);
+	}
 }

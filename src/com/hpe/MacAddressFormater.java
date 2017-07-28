@@ -31,6 +31,10 @@ public class MacAddressFormater {
 		return macAddress.toString();
 	}
 	
+	public String shortMac(String macaddress){
+		return macaddress.replaceAll(":", "");
+	} 
+	
 	public boolean validateMacAddress(){
 		Pattern pattern = Pattern.compile(MAC_PATTERN);
 	    Matcher matcher = pattern.matcher(mac_address);

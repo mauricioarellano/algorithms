@@ -1,4 +1,4 @@
-package com.wipro.test;
+package com.wipro.test.entities;
 
 public class Offer {
 	private int startingBid;

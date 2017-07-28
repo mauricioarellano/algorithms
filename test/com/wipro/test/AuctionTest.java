@@ -7,11 +7,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.wipro.test.entities.Bidder;
+import com.wipro.test.entities.Offer;
+
 public class AuctionTest {
 
 	@Test
 	public void testAuctionOne() {
-		Auction auction = new Auction("Record player");
+		Auctioneer auction = new Auction("Record player");
 		Bidder linda = new Bidder("Linda", new Offer(170, 240, 3));
 		Bidder dave =  new Bidder("Dave",  new Offer(160, 243, 7));
 		Bidder eric =  new Bidder("Eric",  new Offer(190, 240, 4));
@@ -29,7 +32,7 @@ public class AuctionTest {
 
 	@Test
 	public void testAuctionTwo() {
-		Auction auction = new Auction("Snow shoes");
+		Auctioneer auction = new Auction("Snow shoes");
 		Bidder linda = new Bidder("Linda", new Offer(30, 70, 4));
 		Bidder dave =  new Bidder("Dave",  new Offer(30, 70, 3));
 		Bidder eric =  new Bidder("Eric",  new Offer(40, 90, 2));
@@ -47,7 +50,7 @@ public class AuctionTest {
 
 	@Test
 	public void testAuctionThree() {
-		Auction auction = new Auction("Piano");
+		Auctioneer auction = new Auction("Piano");
 		Bidder linda = new Bidder("Linda", new Offer(20_000, 65_000,  2_000));
 		Bidder dave =  new Bidder("Dave",  new Offer(10_000, 70_000, 15_000));
 		Bidder eric =  new Bidder("Eric",  new Offer(22_000, 70_000,  8_000));
@@ -66,7 +69,7 @@ public class AuctionTest {
 	
 	@Test
 	public void test0() {
-		Auction auction = new Auction("Zero");
+		Auctioneer auction = new Auction("Zero");
 		List<Bidder> bidders = new ArrayList<Bidder>();
 		Bidder winner = auction.executeAuction(bidders);
 		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
@@ -75,7 +78,7 @@ public class AuctionTest {
 
 	@Test
 	public void testNull() {
-		Auction auction = new Auction("Null");
+		Auctioneer auction = new Auction("Null");
 		Bidder winner = auction.executeAuction(null);
 		System.out.println("== " + auction + " winner is: " + winner + " ==\n");
 		assertNull(winner);
