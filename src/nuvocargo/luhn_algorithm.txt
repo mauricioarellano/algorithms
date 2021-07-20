@@ -1,0 +1,72 @@
+# https://en.wikipedia.org/wiki/Luhn_algorithm#Example_for_computing_check_digit
+
+# Sample: 
+
+# Validate 79927398713
+
+# (Step 0) 7  9  9  2  7  3  9  8  7  1  3
+# (Step 1) 7  18 9  4  7  6  9  16 7  2  3
+# (Step 2) 7+9+9+4+7+6+9+7+7+2+3 = 70
+
+# 1. Double every second digit, from the rightmost: (1×2) = 2, (8×2) = 16, (3×2) = 6, (2×2) = 4, (9×2) = 18
+# 2. Sum all the individual digits (digits in parentheses are the products from Step 1): x (the check digit) + (2) + 7 + (1+6) + 9 + (6) + 7 + (4) + 9 + (1+8) + 7 = x + 67.
+# 3. If the sum is a multiple of 10, the account number is possibly valid. Note that 3 is the only valid digit that produces a sum (70) that is a multiple of 10.
+
+
+# f(number) -> true/false
+
+# f("79927398713") -> true
+# f("79927398712") -> false
+
+def luhn(number)
+  return false if number.nil? || number.empty?
+  
+  step_0 = [] 
+  number.chars.reverse.each_with_index do |c, idx| #N
+    if idx % 2 == 0 
+      step_0 << c.to_i
+    else
+      step_0 << c.to_i * 2
+    end
+  end
+  
+  step_1 = []
+  step_0.each do |c| #N
+    if c >= 10
+      #separate in digits and sum
+      digit_1 = c % 10
+      digit_2 = c / 10
+      step_1 << digit_1 + digit_2
+    else
+      step_1 << c
+    end
+  end
+  
+  step_2 = 0
+  step_1.each do |c| #N
+    step_2 += c
+  end
+  
+  return (step_2 % 10 == 0) #3N
+  
+  #return true
+end
+
+def luhn2(number)
+  return false if number.nil? || number.empty?
+  
+  checksum = 0
+  number.chars.reverse.each_with_index do |c, idx| #N
+    if idx % 2 == 0 # 0..9
+      step_0 << c.to_i
+    else
+      step_0 << c.to_i * 2 # <10
+    end
+  end
+  
+  return (checksum % 10 == 0) #N
+end
+
+
+puts luhn("79927398713") #true
+puts luhn("79927398712") #false
