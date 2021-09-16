@@ -30,3 +30,57 @@ dict(
 )
 
 */
+
+/**
+# Ruby solution:
+ 
+def max_amount(input)
+    max_money = 0
+    start_time = input[:start_time]
+    end_time = input[:end_time]
+    d_starts = input[:d_starts]
+    d_ends = input[:d_ends]
+    d_pays = input[:d_pays]
+    
+    for i in 0..(d_starts.length-1) do
+        money = 0
+        stack = []
+        if start_time <= d_starts[i] && end_time >= d_ends[i] && (stack.empty? || stack.first[:d_ends] <= d_starts[i])
+            stack << {
+                :d_starts => d_starts[i],
+                :d_ends => d_ends[i],
+                :d_pays => d_pays[i]
+            }
+            money += d_pays[i]
+        end
+        #puts "stack status on #{i} iteration: #{stack}"
+
+        for j in 0..(d_starts.length-1) do
+            #puts "nested iteration [#{i}][#{j}]: #{stack}"
+            if start_time <= d_starts[j] && end_time >= d_ends[j] && (stack.empty? || stack.first[:d_ends] <= d_starts[j])
+                stack << {
+                    :d_starts => d_starts[j],
+                    :d_ends => d_ends[j],
+                    :d_pays => d_pays[j]
+                }
+                money += d_pays[j]
+            end    
+        end
+        
+        max_money = money if money > max_money
+        
+    end
+    
+    return max_money
+end
+
+example1 = {
+    :start_time => 0,
+    :end_time => 10,
+    :d_starts => [2, 3, 5,  7],
+    :d_ends =>   [6, 5, 10, 11],
+    :d_pays =>   [5, 2, 4,  1]
+}
+
+puts max_amount example1 # expects to be 6
+*/
