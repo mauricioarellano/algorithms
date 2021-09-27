@@ -51,4 +51,24 @@ Sample output 3:
 Complexity analysis variables:
 
 n: number of pairs in the input
+
+prereqs_courses1 = [
+    ["Foundations of Computer Science", "Operating Systems"],
+    ["Data Structures", "Algorithms"],
+    ["Computer Networks", "Computer Architecture"],
+    ["Algorithms", "Foundations of Computer Science"],
+    ["Computer Architecture", "Data Structures"],
+    ["Software Design", "Computer Networks"]
+]
+
+prereqs_courses2 = [
+    ["Data Structures", "Algorithms"],
+    ["Algorithms", "Foundations of Computer Science"],
+    ["Foundations of Computer Science", "Logic"]
+ ]
+
+prereqs_courses3 = [
+    ["Data Structures", "Algorithms"]
+]
+
 */
